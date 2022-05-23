@@ -9,12 +9,24 @@ import { OrdersPageComponent } from "./orders-page/orders-page.component";
 import { AdminLayoutComponent } from './shared/admin-layout/admin-layout.component';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AuthGuard } from "../shared/auth.guard";
+import { MatInputModule } from '@angular/material/input';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatIconModule } from "@angular/material/icon";
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        MatInputModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatListModule,
         RouterModule.forChild([
             {
                 path: '', component: AdminLayoutComponent, children: [

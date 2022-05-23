@@ -4,25 +4,26 @@
     </h2>
 
     <div class="form-control">
-        <label for="email">Email</label>
-        <input id="email" type="email" formControlName="email">
-        <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid" class="validation">
-            <small *ngIf="form.get('email')?.errors?.['required']">Enter Email</small>
-            <small *ngIf="form.get('email')?.errors?.['email']">Enter valid Email</small>
-        </div>
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Email</mat-label>
+            <input id="email" type="email" matInput formControlName="email" [errorStateMatcher]="matcher"
+                placeholder="Ex. pat@example.com">
+            <mat-error *ngIf="form.get('email')?.errors?.['email']">Please enter a valid email address</mat-error>
+            <mat-error *ngIf="form.get('email')?.errors?.['required']">Email is required</mat-error>
+        </mat-form-field>
     </div>
 
     <div class="form-control">
-        <label for="password">Password</label>
-        <input id="password" type="password" formControlName="password">
-        <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="validation">
-            <small *ngIf="form.get('password')?.errors?.['required']">Enter Password</small>
-            <small *ngIf="form.get('password')?.errors?.['minlength']">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input id="password" type="password" matInput formControlName="password" [errorStateMatcher]="matcher">
+            <mat-error *ngIf="form.get('password')?.errors?.['required']">Password is required</mat-error>
+            <mat-error *ngIf="form.get('password')?.errors?.['minlength']">
                 Password must be at least {{form.get('password')?.errors?.['minlength'].requiredLength}} characters.
-                Now he {{form.get('password')?.errors?.['minlength'].actualLength}}
-            </small>
-        </div>
+                <!-- Now he {{form.get('password')?.errors?.['minlength'].actualLength}} -->
+            </mat-error>
+        </mat-form-field>
     </div>
 
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="form.invalid  || submitted">Logon</button>
+    <button type="submit" mat-button class="btn btn-primary btn-block btn-dark" [disabled]="form.invalid  || submitted">Login</button>
 </form>

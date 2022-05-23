@@ -1,4 +1,4 @@
-<nav class="navbar bg-dark">
+<!-- <nav class="navbar bg-dark">
     <h1>
         <a [routerLink]="['/']">Online Shop</a>
     </h1>
@@ -23,8 +23,45 @@
             </li>
         </ul>
     </ng-template>
-</nav>
+</nav> -->
 
-<div class="container">
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button *ngIf="auth.isAuthenticated();">
+            <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
+        </button>
+        <a mat-button [routerLink]="['/']">
+            <h1>Online Shop</h1>
+        </a>
+        <!-- This fills the remaining space of the current row -->
+        <span class="fill-remaining-space"></span>
+        <div *ngIf="auth.isAuthenticated(); else login" fxLayoutAlign="flex-end center">
+            <a mat-button [routerLink]="['/admin','dashboard']">Dashboard</a>
+            <a mat-button [routerLink]="['/admin','add']">Add Product</a>
+            <a mat-button [routerLink]="['/admin','orders']">Orders</a>
+            <a mat-button href="#" (click)="logout($event)">Logout</a>
+        </div>
+        <ng-template #login>
+            <a mat-button [routerLink]="['/admin','login']">Login</a>
+        </ng-template>
+    </mat-toolbar-row>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" mode="side" class="sidenav">
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/admin','dashboard']">Dashboard</a>
+            <a mat-list-item [routerLink]="['/admin','add']">Add Product</a>
+            <a mat-list-item [routerLink]="['/admin','orders']">Orders</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div style="height: 88vh;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <div class="container">
     <router-outlet></router-outlet>
-</div>
+</div> -->
