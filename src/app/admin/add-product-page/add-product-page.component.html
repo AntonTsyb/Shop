@@ -1,1 +1,46 @@
-<p>add-product-page works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()">
+    <h2 class="text-center">
+        Add Product
+    </h2>
+
+    <div class="form-control">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select>
+                <mat-option *ngFor="let type of types" [value]="type.value">
+                  {{type.viewValue}}
+                </mat-option>
+              </mat-select>
+            <mat-error *ngIf="form.get('type')?.errors?.['required']">Choose product type</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-control">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input id="title" type="title" matInput formControlName="title" [errorStateMatcher]="matcher" />
+            <mat-error *ngIf="form.get('title')?.errors?.['required']">Enter product name</mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="form-control">
+        <label for="photo">Photo</label>
+        <quill-editor formControlName="photo"></quill-editor>
+    </div>
+
+    <div class="form-control">
+        <label for="info">Information</label>
+        <quill-editor formControlName="info"></quill-editor>
+    </div>
+
+    <div class="form-control">
+        <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Price</mat-label>
+            <input id="price" type="price" matInput formControlName="price" [errorStateMatcher]="matcher" />
+            <mat-error *ngIf="form.get('price')?.errors?.['required']">Enter product price</mat-error>
+        </mat-form-field>
+    </div>
+
+    <button type="submit" mat-button class="btn btn-primary btn-block btn-dark"
+        [disabled]="form.invalid  || submitted">Add</button>
+</form>
